@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "doaflip",
+  "version": "${version}",
+  "name": "Do A Flip",
+  "description": "Makes mobs do a flip!",
+  "authors": [
+    "Mrbysco",
+    "ShyNieke"
+  ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/do-a-flip",
+    "sources": "https://github.com/Mrbysco/DoAFlip",
+    "issues": "https://github.com/Mrbysco/DoAFlip/issues"
+  },
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "com.mrbysco.doaflip.DoAFlipFabric"
+    ],
+    "modmenu": [
+      "com.mrbysco.doaflip.config.FlipModMenuIntegration"
+    ]
+  },
+  "mixins": [
+    "doaflip.mixins.json",
+    "doaflip.fabric.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14",
+    "fabric": "*",
+    "minecraft": "~1.20.1",
+    "java": ">=17"
+  }
+}
+  
