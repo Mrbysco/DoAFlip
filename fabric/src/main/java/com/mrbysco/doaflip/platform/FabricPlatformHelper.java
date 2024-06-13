@@ -8,6 +8,6 @@ import net.minecraft.world.entity.LivingEntity;
 public class FabricPlatformHelper implements IPlatformHelper {
 	@Override
 	public CompoundTag getPersistentData(LivingEntity livingEntity) {
-		return ((IPersistentData) livingEntity).getPersistentData();
+		return ((IPersistentData) livingEntity).doaflip$getPersistentData();
 	}
 }
