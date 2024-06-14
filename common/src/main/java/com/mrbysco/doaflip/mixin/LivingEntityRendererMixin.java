@@ -14,10 +14,10 @@ public class LivingEntityRendererMixin<T extends LivingEntity> {
 
 
 	@Inject(
-			method = "setupRotations(Lnet/minecraft/world/entity/LivingEntity;Lcom/mojang/blaze3d/vertex/PoseStack;FFFF)V",
+			method = "setupRotations(Lnet/minecraft/world/entity/LivingEntity;Lcom/mojang/blaze3d/vertex/PoseStack;FFF)V",
 			at = @At("RETURN")
 	)
-	public void doaflip$setupRotations(T livingEntity, PoseStack poseStack, float ageInTicks, float rotationYaw, float partialTicks, float scale, CallbackInfo ci) {
+	public void doaflip$setupRotations(T livingEntity, PoseStack poseStack, float ageInTicks, float rotationYaw, float partialTicks, CallbackInfo ci) {
 		FlipHandler.doFlipping(livingEntity, poseStack, partialTicks);
 	}
 }

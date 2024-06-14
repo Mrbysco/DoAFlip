@@ -8,7 +8,7 @@ plugins {
 subprojects {
     apply plugin: 'java'
 
-    java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+    java.toolchain.languageVersion = JavaLanguageVersion.of(17)
     java.withSourcesJar()
 
     jar {
@@ -47,7 +47,7 @@ subprojects {
 
     tasks.withType(JavaCompile).configureEach {
         it.options.encoding = 'UTF-8'
-        it.options.getRelease().set(21)
+        it.options.getRelease().set(17)
     }
 
     processResources {
