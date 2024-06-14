@@ -1,22 +1,22 @@
 package com.mrbysco.doaflip.config;
 
-import com.mrbysco.doaflip.client.ConfigCache;
 import com.mrbysco.doaflip.Constants;
+import com.mrbysco.doaflip.client.ConfigCache;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.event.config.ModConfigEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.event.config.ModConfigEvent;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.List;
 
-public class ForgeFlipConfig {
+public class NeoForgeFlipConfig {
 	public static class Client {
-		public final ForgeConfigSpec.DoubleValue flipChance;
-		public final ForgeConfigSpec.BooleanValue invertMobs;
-		public final ForgeConfigSpec.ConfigValue<List<? extends String>> flippingMobs;
+		public final ModConfigSpec.DoubleValue flipChance;
+		public final ModConfigSpec.BooleanValue invertMobs;
+		public final ModConfigSpec.ConfigValue<List<? extends String>> flippingMobs;
 
-		Client(ForgeConfigSpec.Builder builder) {
+		Client(ModConfigSpec.Builder builder) {
 			builder.comment("Flip settings")
 					.push("Flip");
 
@@ -39,11 +39,11 @@ public class ForgeFlipConfig {
 	}
 
 
-	public static final ForgeConfigSpec clientSpec;
+	public static final ModConfigSpec clientSpec;
 	public static final Client CLIENT;
 
 	static {
-		final Pair<Client, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(Client::new);
+		final Pair<Client, ModConfigSpec> specPair = new ModConfigSpec.Builder().configure(Client::new);
 		clientSpec = specPair.getRight();
 		CLIENT = specPair.getLeft();
 	}
