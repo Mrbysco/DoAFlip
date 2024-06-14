@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[2,)"
+loaderVersion="[3,)"
 issueTrackerURL="https://github.com/Mrbysco/DoAFlip/issues"
 license="MIT"
 
@@ -16,7 +16,7 @@ Makes mobs do a flip!
 [[dependencies.doaflip]]
 modId="minecraft"
 type="required"
-versionRange="[1.20.4,1.21)"
+versionRange="[1.20.6,1.21)"
 ordering="NONE"
 side="BOTH"
 [[mixins]]

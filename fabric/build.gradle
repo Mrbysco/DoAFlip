@@ -102,9 +102,10 @@ if (System.getenv().CURSEFORGE_KEY) {
 
         def mainFile = upload(project.curseforge_id, remapJar)
         mainFile.releaseType = 'beta'
-        mainFile.addGameVersion "Fabric"
-        mainFile.addGameVersion "${minecraft_version}"
-        mainFile.addGameVersion "Java 17"
+        mainFile.addModLoader("Fabric")
+        mainFile.addGameVersion("${mc_version}")
+        mainFile.addJavaVersion("Java 21")
+        mainFile.addEnvironment('Server', 'Client')
 
         mainFile.changelog = file("$project.rootDir/changelog.md")
         mainFile.changelogType = 'markdown'
