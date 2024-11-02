@@ -4,7 +4,8 @@
   "package": "com.mrbysco.doaflip.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
-    "LivingEntityRendererMixin"
+    "LivingEntityRendererMixin",
+    "LivingEntityRenderStateMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -2,17 +2,18 @@ package com.mrbysco.doaflip.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import com.mrbysco.doaflip.platform.Services;
+import com.mrbysco.doaflip.FlipState;
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class FlipHandler {
+	private static final RandomSource random = RandomSource.create();
 	private static final String PREVENT_FLIP = "prevent_flip";
 	private static final String FLIP_START_TICK_KEY = "flip_start_tick";
 	private static final String FLIP_PROGRESS_KEY = "flip_progress";
@@ -22,16 +23,16 @@ public class FlipHandler {
 	/**
 	 * Handles the flip animation for a living entity
 	 *
-	 * @param livingEntity The entity to potentially flip
+	 * @param renderState The entity to potentially flip
 	 * @param poseStack    The PoseStack to apply the flip rotation to
 	 * @param partialTicks The partial ticks for interpolation
 	 */
-	public static void doFlipping(LivingEntity livingEntity, PoseStack poseStack, float partialTicks) {
-		if (!canFlip(livingEntity)) return;
-		if (livingEntity instanceof Player player && player.getAbilities().flying) return;
+	public static void doFlipping(LivingEntityRenderState renderState, PoseStack poseStack, float partialTicks) {
+		if(!(renderState instanceof FlipState flipState)) return;
+		if (!flipState.doAFlip$canFlip() || flipState.doAFlip$isFlying()) return;
 
-		CompoundTag persistentData = Services.PLATFORM.getPersistentData(livingEntity);
-		if (livingEntity.onGround() || livingEntity.isInWater() || livingEntity.isVehicle()) {
+		CompoundTag persistentData = flipState.doAFlip$persistentData();
+		if (flipState.doAFlip$shouldResetData()) {
 			//Remove flip data if it exists
 			persistentData.remove(PREVENT_FLIP);
 			persistentData.remove(FLIP_START_TICK_KEY);
@@ -43,12 +44,11 @@ public class FlipHandler {
 		if (persistentData.contains(PREVENT_FLIP)) return;
 
 		// Check how many blocks from the ground the entity is
-		double distanceFromGround = getDistanceFromGround(livingEntity);
+		double distanceFromGround = flipState.doAFlip$distanceFromGround();
 		if (distanceFromGround <= 3) return;
 
 		// Check if the entity is falling and hasn't started flipping yet
-		if ((livingEntity.getDeltaMovement().y < 0 || (livingEntity instanceof Player && livingEntity.getDeltaMovement().y == 0.419875D)) && !persistentData.contains(FLIP_START_TICK_KEY)) {
-			RandomSource random = livingEntity.getRandom();
+		if (flipState.doAFlip$isFalling() && !persistentData.contains(FLIP_START_TICK_KEY)) {
 			float flipProbability = ConfigCache.flipChance;
 			float randomFloat = random.nextFloat();
 
@@ -58,7 +58,7 @@ public class FlipHandler {
 				//The higher the distance, the longer the flip (capped at 1.5 seconds)
 				float totalDuration = (float) Mth.clamp(distanceFromGround * 1F, 5F, 30.0F);
 
-				persistentData.putLong(FLIP_START_TICK_KEY, livingEntity.level().getGameTime());
+				persistentData.putFloat(FLIP_START_TICK_KEY, renderState.ageInTicks);
 				persistentData.putFloat(FLIP_PROGRESS_KEY, 0.0f);
 				persistentData.putFloat(FLIP_DURATION, totalDuration);
 				persistentData.putBoolean(FRONT_FLIP, random.nextBoolean());
@@ -71,7 +71,7 @@ public class FlipHandler {
 
 		// Handle the flip animation
 		if (persistentData.contains(FLIP_START_TICK_KEY)) {
-			long startTick = persistentData.getLong(FLIP_START_TICK_KEY);
+			float startAge = persistentData.getFloat(FLIP_START_TICK_KEY);
 			float progress = persistentData.getFloat(FLIP_PROGRESS_KEY);
 			// Duration of the flip animation in ticks
 			float totalDuration = persistentData.contains(FLIP_DURATION) ? persistentData.getFloat(FLIP_DURATION) : 10.0F;
@@ -85,11 +85,11 @@ public class FlipHandler {
 				poseStack.mulPose(Axis.XP.rotationDegrees(doesFrontFlip ? -rotationAngle : rotationAngle));
 
 				//Offset the entity to make it look like it's flipping around its center
-				poseStack.translate(0.0, -livingEntity.getBbHeight() / 2F, 0.0);
+				poseStack.translate(0.0, -renderState.boundingBoxHeight / 2F, 0.0);
 
 				// Update progress
-				long currentTick = livingEntity.level().getGameTime();
-				progress = (currentTick - startTick) / totalDuration;
+				float currentAge = renderState.ageInTicks;
+				progress = (currentAge - startAge) / totalDuration;
 				persistentData.putFloat(FLIP_PROGRESS_KEY, progress);
 			} else {
 				// Flip animation is complete, remove the flip data
@@ -104,7 +104,7 @@ public class FlipHandler {
 		}
 	}
 
-	private static double getDistanceFromGround(LivingEntity livingEntity) {
+	public static double getDistanceFromGround(LivingEntity livingEntity) {
 		BlockPos pos = livingEntity.blockPosition();
 		Level level = livingEntity.level();
 		int distance;
@@ -115,10 +115,10 @@ public class FlipHandler {
 				break;
 			}
 		}
-		return distance;
+		return distance - 1;
 	}
 
-	private static boolean canFlip(LivingEntity livingEntity) {
+	public static boolean canFlip(LivingEntity livingEntity) {
 		return ConfigCache.invertMobs != ConfigCache.mobs.contains(livingEntity.getType());
 	}
 }
