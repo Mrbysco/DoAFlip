@@ -1,7 +1,8 @@
 #Flip settings
 [Flip]
 	#The chance of a flip happening when a mob falls from a high enough distance [0.0 = 0%, 0.1 = 10%, 1.0 = 100%] (Default: 0.35)
-	#Range: 0.0 ~ 1.0
+	# Default: 0.35
+	# Range: 0.0 ~ 1.0
 	flipChance = 1.0
 	#When enabled turns the flippingMobs option into a blacklist [default: true]
 	invertMobs = true
