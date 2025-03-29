@@ -24,3 +24,5 @@ earlyWindowSkipGLVersions = []
 maxThreads = -1
 #Squir?
 earlyWindowSquir = false
+#Enable synchronous OpenGL debug output and object labeling
+debugOpenGl = false

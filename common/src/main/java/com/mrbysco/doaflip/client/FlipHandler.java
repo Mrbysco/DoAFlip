@@ -71,13 +71,13 @@ public class FlipHandler {
 
 		// Handle the flip animation
 		if (persistentData.contains(FLIP_START_TICK_KEY)) {
-			float startAge = persistentData.getFloat(FLIP_START_TICK_KEY);
-			float progress = persistentData.getFloat(FLIP_PROGRESS_KEY);
+			float startAge = persistentData.getFloatOr(FLIP_START_TICK_KEY, 0.0F);
+			float progress = persistentData.getFloatOr(FLIP_PROGRESS_KEY, 0.0F);
 			// Duration of the flip animation in ticks
-			float totalDuration = persistentData.contains(FLIP_DURATION) ? persistentData.getFloat(FLIP_DURATION) : 10.0F;
+			float totalDuration = persistentData.contains(FLIP_DURATION) ? persistentData.getFloatOr(FLIP_DURATION, 0.0F) : 10.0F;
 
 			if (progress < 1.0f) {
-				boolean doesFrontFlip = persistentData.getBoolean(FRONT_FLIP);
+				boolean doesFrontFlip = persistentData.getBooleanOr(FRONT_FLIP, false);
 				// Calculate the rotation angle based on the progress and the partial ticks
 				float rotationAngle = 360.0F * progress + 180.0f * partialTicks / totalDuration;
 
