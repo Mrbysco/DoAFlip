@@ -30,9 +30,9 @@ public class NeoForgeFlipConfig {
 
 			flippingMobs = builder
 					.comment("Defines a list of mobs that can flip when falling from a high enough distance [Format: modid:entity]")
-					.defineListAllowEmpty(List.of("flippingMobs"), () ->
+					.defineListAllowEmpty("flippingMobs", () ->
 									List.of("minecraft:bat", "minecraft:armor_stand", "minecraft:ender_dragon", "minecraft:wither"),
-							() -> "", o -> (o instanceof String string && ResourceLocation.tryParse(string) != null));
+							String::new, o -> (o instanceof String string && ResourceLocation.tryParse(string) != null));
 
 			builder.pop();
 		}

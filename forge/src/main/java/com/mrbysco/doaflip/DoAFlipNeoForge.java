@@ -9,14 +9,12 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 
-@Mod(Constants.MOD_ID)
+@Mod(value = Constants.MOD_ID, dist = Dist.CLIENT)
 public class DoAFlipNeoForge {
 
-	public DoAFlipNeoForge(IEventBus eventBus, ModContainer container, Dist dist) {
-		if (dist.isClient()) {
-			container.registerConfig(ModConfig.Type.CLIENT, NeoForgeFlipConfig.clientSpec);
-			container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
-			eventBus.register(NeoForgeFlipConfig.class);
-		}
+	public DoAFlipNeoForge(IEventBus eventBus, ModContainer container) {
+		container.registerConfig(ModConfig.Type.CLIENT, NeoForgeFlipConfig.clientSpec);
+		container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
+		eventBus.register(NeoForgeFlipConfig.class);
 	}
 }
