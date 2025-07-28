@@ -1,1 +1,1 @@
-* Initial multiloader build
+* Add config option `minimumFallDistance` to set the minimum fall distance before a mob may flip
