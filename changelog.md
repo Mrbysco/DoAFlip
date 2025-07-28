@@ -1,1 +1,1 @@
-* Initial update to 1.21
+* Add config option `minimumFallDistance` to set the minimum fall distance before a mob may flip
