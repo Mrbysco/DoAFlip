@@ -1,0 +1,16 @@
+{
+  "doaflip.configuration.flip": "Flip",
+  "doaflip.configuration.flipChance": "Flip Chance",
+  "doaflip.configuration.invertMobs": "Invert Mobs",
+  "doaflip.configuration.minimumFallDistance": "Minimum Fall Distance",
+  "doaflip.configuration.flippingMobs": "Flipping Mobs",
+
+  "text.autoconfig.doaflip.title": "Do A Flip",
+  "text.autoconfig.doaflip.option.client": "Flip",
+  "text.autoconfig.doaflip.option.client.flipChance": "Flip Chance",
+  "text.autoconfig.doaflip.option.client.invertMobs": "Invert Mobs",
+  "text.autoconfig.doaflip.option.client.minimumFallDistance": "Minimum Fall Distance",
+  "text.autoconfig.doaflip.option.client.flippingMobs": "Flipping Mobs"
+
+
+}
