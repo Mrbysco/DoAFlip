@@ -10,4 +10,10 @@ public interface IPlatformHelper {
 	 * @return The persistent data for the living entity.
 	 */
 	CompoundTag getPersistentData(LivingEntity livingEntity);
+
+	/**
+	 * Gets the minimum fall distance required for a mob to flip.
+	 * @return the configured minimum fall distance.
+	 */
+	int getMinimumFallDistance();
 }

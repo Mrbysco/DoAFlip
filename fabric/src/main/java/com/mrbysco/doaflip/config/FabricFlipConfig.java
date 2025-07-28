@@ -16,6 +16,8 @@ public class FabricFlipConfig implements ConfigData {
 	public static class Client {
 		@Comment("The chance of a flip happening when a mob falls from a high enough distance (MUST BE BETWEEN 0 and 1) [0.0 = 0%, 0.1 = 10%, 1.0 = 100%] (Default: 0.35)")
 		public double flipChance = 0.35D;
+		@Comment("The minimum fall distance required for a mob to flip (Between 1 and 32) [default: 3]")
+		public int minimumFallDistance = 3;
 		@Comment("When enabled turns the flippingMobs option into a blacklist [default: true]")
 		public boolean invertMobs = true;
 		@Comment("Defines a list of mobs that can flip when falling from a high enough distance [Format: modid:entity]")

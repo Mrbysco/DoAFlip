@@ -13,6 +13,7 @@ import java.util.List;
 public class NeoForgeFlipConfig {
 	public static class Client {
 		public final ModConfigSpec.DoubleValue flipChance;
+		public final ModConfigSpec.IntValue minimumFallDistance;
 		public final ModConfigSpec.BooleanValue invertMobs;
 		public final ModConfigSpec.ConfigValue<List<? extends String>> flippingMobs;
 
@@ -23,6 +24,10 @@ public class NeoForgeFlipConfig {
 			flipChance = builder
 					.comment("The chance of a flip happening when a mob falls from a high enough distance [0.0 = 0%, 0.1 = 10%, 1.0 = 100%] (Default: 0.35)")
 					.defineInRange("flipChance", 0.35D, 0.0D, 1.0D);
+
+			minimumFallDistance = builder
+					.comment("The minimum fall distance required for a mob to flip (Between 1 and 32) [default: 3]")
+					.defineInRange("minimumFallDistance", 3, 1, 32);
 
 			invertMobs = builder
 					.comment("When enabled turns the flippingMobs option into a blacklist [default: true]")

@@ -45,7 +45,7 @@ public class FlipHandler {
 
 		// Check how many blocks from the ground the entity is
 		double distanceFromGround = flipState.doAFlip$distanceFromGround();
-		if (distanceFromGround <= 3) return;
+		if (distanceFromGround <= Services.PLATFORM.getMinimumFallDistance()) return;
 
 		// Check if the entity is falling and hasn't started flipping yet
 		if (flipState.doAFlip$isFalling() && !persistentData.contains(FLIP_START_TICK_KEY)) {
