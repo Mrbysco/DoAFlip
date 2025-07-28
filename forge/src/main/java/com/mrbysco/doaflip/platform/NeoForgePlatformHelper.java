@@ -1,6 +1,6 @@
 package com.mrbysco.doaflip.platform;
 
-import com.mrbysco.doaflip.config.ForgeFlipConfig;
+import com.mrbysco.doaflip.config.NeoForgeFlipConfig;
 import com.mrbysco.doaflip.platform.services.IPlatformHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.LivingEntity;
@@ -14,6 +14,6 @@ public class NeoForgePlatformHelper implements IPlatformHelper {
 
 	@Override
 	public int getMinimumFallDistance() {
-		return ForgeFlipConfig.CLIENT.minimumFallDistance.get();
+		return NeoForgeFlipConfig.CLIENT.minimumFallDistance.get();
 	}
 }
