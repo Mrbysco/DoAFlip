@@ -19,7 +19,7 @@ public class NeoForgeFlipConfig {
 
 		Client(ModConfigSpec.Builder builder) {
 			builder.comment("Flip settings")
-					.push("Flip");
+					.push("flip");
 
 			flipChance = builder
 					.comment("The chance of a flip happening when a mob falls from a high enough distance [0.0 = 0%, 0.1 = 10%, 1.0 = 100%] (Default: 0.35)")
