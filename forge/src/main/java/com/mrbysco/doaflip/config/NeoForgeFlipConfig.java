@@ -69,5 +69,6 @@ public class NeoForgeFlipConfig {
 		ConfigCache.setFlipChance(CLIENT.flipChance.get().floatValue());
 		ConfigCache.setInvertMobs(CLIENT.invertMobs.get());
 		ConfigCache.generateEntityList(CLIENT.flippingMobs.get());
+		ConfigCache.setMinimumFallDistance(CLIENT.minimumFallDistance.get());
 	}
 }

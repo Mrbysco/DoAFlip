@@ -26,12 +26,14 @@ public class DoAFlipFabric implements ClientModInitializer {
 			ConfigCache.setFlipChance((float) config.client.flipChance);
 			ConfigCache.setInvertMobs(config.client.invertMobs);
 			ConfigCache.generateEntityList(config.client.flippingMobs);
+			ConfigCache.setMinimumFallDistance(config.client.minimumFallDistance);
 			return InteractionResult.PASS;
 		});
 		configHolder.registerSaveListener((holder, config) -> {
 			ConfigCache.setFlipChance((float) config.client.flipChance);
 			ConfigCache.setInvertMobs(config.client.invertMobs);
 			ConfigCache.generateEntityList(config.client.flippingMobs);
+			ConfigCache.setMinimumFallDistance(config.client.minimumFallDistance);
 			return InteractionResult.PASS;
 		});
 

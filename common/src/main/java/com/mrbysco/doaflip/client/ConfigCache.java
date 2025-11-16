@@ -9,6 +9,11 @@ public class ConfigCache {
 	public static float flipChance = 0.2F;
 	public static boolean invertMobs = true;
 	public static final List<EntityType<?>> mobs = new ArrayList<>();
+	public static int minimumFallDistance = 3;
+
+	public static void setMinimumFallDistance(int value) {
+		minimumFallDistance = value;
+	}
 
 	public static void setFlipChance(float value) {
 		flipChance = value;
