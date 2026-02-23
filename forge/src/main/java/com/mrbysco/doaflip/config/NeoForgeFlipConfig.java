@@ -2,7 +2,7 @@ package com.mrbysco.doaflip.config;
 
 import com.mrbysco.doaflip.Constants;
 import com.mrbysco.doaflip.client.ConfigCache;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.common.ModConfigSpec;
@@ -37,7 +37,7 @@ public class NeoForgeFlipConfig {
 					.comment("Defines a list of mobs that can flip when falling from a high enough distance [Format: modid:entity]")
 					.defineListAllowEmpty("flippingMobs", () ->
 									List.of("minecraft:bat", "minecraft:armor_stand", "minecraft:ender_dragon", "minecraft:wither"),
-							String::new, o -> (o instanceof String string && ResourceLocation.tryParse(string) != null));
+							String::new, o -> (o instanceof String string && Identifier.tryParse(string) != null));
 
 			builder.pop();
 		}
