@@ -16,7 +16,7 @@ Makes mobs do a flip!
 [[dependencies.doaflip]]
 modId="minecraft"
 type="required"
-versionRange="[1.21.11,1.22)"
+versionRange="[26.1.1,)"
 ordering="NONE"
 side="BOTH"
 [[mixins]]

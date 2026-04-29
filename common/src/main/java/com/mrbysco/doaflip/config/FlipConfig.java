@@ -1,16 +1,13 @@
 package com.mrbysco.doaflip.config;
 
-import com.mrbysco.doaflip.Constants;
 import com.mrbysco.doaflip.client.ConfigCache;
 import net.minecraft.resources.Identifier;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.common.ModConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.List;
 
-public class NeoForgeFlipConfig {
+public class FlipConfig {
 	public static class Client {
 		public final ModConfigSpec.DoubleValue flipChance;
 		public final ModConfigSpec.IntValue minimumFallDistance;
@@ -53,19 +50,7 @@ public class NeoForgeFlipConfig {
 		CLIENT = specPair.getLeft();
 	}
 
-	@SubscribeEvent
-	public static void onLoad(final ModConfigEvent.Loading configEvent) {
-		Constants.LOGGER.debug("Loaded Do A Flip's config file {}", configEvent.getConfig().getFileName());
-		refreshCache();
-	}
-
-	@SubscribeEvent
-	public static void onFileChange(final ModConfigEvent.Reloading configEvent) {
-		Constants.LOGGER.warn("Do A Flip's config just got changed on the file system!");
-		refreshCache();
-	}
-
-	private static void refreshCache() {
+	public static void refreshCache() {
 		ConfigCache.setFlipChance(CLIENT.flipChance.get().floatValue());
 		ConfigCache.setInvertMobs(CLIENT.invertMobs.get());
 		ConfigCache.generateEntityList(CLIENT.flippingMobs.get());
